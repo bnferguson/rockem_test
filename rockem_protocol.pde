@@ -1,3 +1,4 @@
+
 class RockemProtocol {  
   int punchLeft, punchRight, moveForwardBack, moveLeftRight, userId;
 
@@ -38,8 +39,7 @@ class RockemProtocol {
   }
 
   public String toString() {
-    String output = "" + moveLeftRight + "," + moveForwardBack + "," + punchLeft + "," + punchRight;
-    reset();
+    String output = userId + "," + moveLeftRight + "," + moveForwardBack + "," + punchLeft + "," + punchRight;
     return output;
   }
 }

@@ -1,12 +1,21 @@
+import processing.serial.*; 
+
 RockemProtocol rockem;
 boolean[] keys = new boolean[526];
 
+Serial port; 
+
 void setup() {
-  rockem = new RockemProtocol(1);
   size(100,100);
+
+  // This sadly has to be changed on each machine. For mine, it's the 5th port, on another it may be different. Check and update
+  println(Serial.list()); 
+  port = new Serial(this, Serial.list()[4], 9600); 
 }
 
 void draw() {
+  rockem = new RockemProtocol(1);
+  
   if(checkKey('a')) {
     rockem.moveLeft();
   }
@@ -30,8 +39,10 @@ void draw() {
   if (checkKey('k')){
     rockem.punchRight();
   }
-
-  println(rockem);
+  
+  String output = rockem.toString();
+  port.write(output.getBytes());     
+  println(output);
 }
 
 boolean checkKey(int k) {
